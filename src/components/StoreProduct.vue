@@ -1,0 +1,139 @@
+<template>
+<div class="product">
+  <div class="product-image">
+    <div class="product-overlay" @click="addCart">
+      <div class="product-add">
+        {{ $t('demo.add') }}
+      </div>
+    </div>
+    <img :src="product.image">
+  </div>
+  <div class="product-info">
+    <div class="product-sizes">
+      <div
+        v-for="s in product.sizes"
+        :key="s"
+        class="product-size"
+        :class="{ active: s === size }"
+        @click="size = s"
+      >
+        {{ s }}
+      </div>
+    </div>
+    <div class="product-name">
+      {{ product.name }}
+    </div>
+    <div class="product-variant">
+      {{ product.variants[0] }}
+    </div>
+  </div>
+</div>
+</template>
+
+<script>
+import cartStore from '/src/store';
+
+export default {
+  name: 'store-product',
+  props: {
+    product: {
+      type: Object,
+      default: () => {},
+    },
+  },
+  data() {
+    return {
+      size: this.product.sizes[0],
+    };
+  },
+  computed: {
+    store() {
+      return cartStore();
+    },
+  },
+  methods: {
+    addCart() {
+      this.store.addItem(
+        {
+          id: this.product.id,
+          name: this.product.name,
+          size: this.size,
+          variant: this.product.variants[0],
+          price: this.product.price,
+          image: this.product.image,
+        },
+        this.product,
+      );
+    },
+  },
+};
+</script>
+
+<style lang="postcss">
+@import '../assets/css/global.css';
+
+.product {
+  margin-right: 32px;
+  margin-bottom: 72px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  .product-overlay {
+    @mixin flex-center;
+    opacity: 0;
+    transition: opacity 0.4s ease-in;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.35);
+    cursor: pointer;
+    .product-add {
+      @mixin title 20px;
+      background-color: $purple;
+      padding: 16px 32px;
+      color: white;
+    }
+  }
+  .product-image {
+    display: flex;
+    width: 360px;
+    flex-grow: 1;
+    background-color: $text-med2;
+    position: relative;
+    &:hover .product-overlay {
+      opacity: 1;
+    }
+    img {
+      width: 100%;
+      height: auto;
+      align-self: center;
+    }
+  }
+  .product-info {
+    padding: 8px 4px;
+    .product-sizes {
+      display: flex;
+      flex-direction: row;
+      .product-size {
+        @mixin product-size;
+        margin-right: 8px;
+        cursor: pointer;
+        &.active {
+          background: $text-dark3;
+          color: $bg-light;
+        }
+      }
+    }
+    .product-name {
+      @mixin title-semibold 19px;
+      margin: 8px 0 2px;
+    }
+    .product-variant {
+      @mixin text-italic 16px;
+    }
+  }
+}
+</style>
