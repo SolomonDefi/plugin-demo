@@ -15,6 +15,12 @@
             <img :src="SolomonImg">
             {{ $t('plugin.solomon') }}
           </div>
+          <div class="payment-paypal">
+            <img :src="PaypalImg">
+          </div>
+          <div class="payment-card">
+            {{ $t('demo.checkout.payment.card') }}
+          </div>
         </div>
       </div>
       <SectionHead
@@ -40,12 +46,14 @@
 
 <script>
 import SolomonImg from '/src/assets/img/solomon_white.png';
+import PaypalImg from '/src/assets/img/paypal.png';
 
 export default {
   name: 'checkout',
   data() {
     return {
       SolomonImg,
+      PaypalImg,
       paymentType: null,
     };
   },
@@ -93,6 +101,18 @@ export default {
             height: 22px;
             margin-right: 8px;
           }
+        }
+        .payment-paypal {
+          background-color: $paypal-light;
+          > img {
+            height: 20px;
+            margin-top: 2px;
+          }
+        }
+        .payment-card {
+          background-color: $main-blue;
+          color: white;
+          @mixin title 16px;
         }
       }
     }

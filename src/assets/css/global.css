@@ -16,6 +16,9 @@ $text-med2: #b2b2b2;
 
 $border-med: #d8d8d8;
 
+$paypal-light: #0079c1;
+$card-blue: #286cc3;
+
 @define-mixin title-bold {
   font-family: 'Montserrat', 'Avenir', 'sans-serif';
   font-weight: 700;
