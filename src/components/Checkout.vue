@@ -11,15 +11,9 @@
           {{ $t('demo.checkout.payment.express') }}
         </div>
         <div class="payment-options">
-          <div class="payment-solomon" @click="showPlugin('solomon')">
+          <div class="payment-solomon" @click="showPlugin('chargebacks')">
             <img :src="SolomonImg">
-            {{ $t('plugin.solomon.label') }}
-          </div>
-          <div class="payment-paypal" @click="showPlugin('paypal')">
-            <img :src="PaypalImg">
-          </div>
-          <div class="payment-card" @click="showPlugin('card')">
-            {{ $t('demo.checkout.payment.card') }}
+            {{ $t('plugin.solomon') }}
           </div>
         </div>
       </div>
@@ -45,14 +39,12 @@
 </template>
 
 <script>
-import PaypalImg from '/src/assets/img/paypal.png';
 import SolomonImg from '/src/assets/img/solomon_white.png';
 
 export default {
   name: 'checkout',
   data() {
     return {
-      PaypalImg,
       SolomonImg,
       paymentType: null,
     };
@@ -101,18 +93,6 @@ export default {
             height: 22px;
             margin-right: 8px;
           }
-        }
-        .payment-paypal {
-          background-color: $paypal-light;
-          > img {
-            height: 20px;
-            margin-top: 2px;
-          }
-        }
-        .payment-card {
-          background-color: $main-blue;
-          color: white;
-          @mixin title 16px;
         }
       }
     }

@@ -5,7 +5,7 @@
       <div class="footer-left">
         <div class="solomon-logo">
           <img :src="SolomonImg">
-          <div>{{ $t('demo.footer.solomon') }}</div>
+          <div>{{ $t('plugin.solomon') }}</div>
         </div>
         <div class="solomon-demo">
           {{ $t('demo.footer.text') }}

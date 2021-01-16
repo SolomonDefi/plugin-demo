@@ -1,9 +1,10 @@
 <template>
 <Dropdown
-  v-model="open"
+  :modelValue="open"
   transition="slm-select"
   class="slm-select"
-  :class="{ open }"
+  :class="{ open, disabled }"
+  @update:modelValue="setOpen"
 >
   <div class="slm-select-value">
     <div>{{ sOptions[modelValue] }}</div>
@@ -36,6 +37,7 @@ export default {
       type: [Object, Array],
       default: () => ({}),
     },
+    disabled: Boolean,
   },
   data() {
     return {
@@ -61,35 +63,39 @@ export default {
     select(option) {
       this.$emit('update:modelValue', option);
       this.open = false;
-    }
-  }
+    },
+    setOpen(open) {
+      this.open = !this.disabled && open;
+    },
+  },
 };
 </script>
 
 <style lang="postcss">
 @import '../../assets/css/global.css';
 
-.slm-select {
-  @mixin title-regular 14px;
-  @mixin flex-center;
-  border-radius: 4px;
-  background-color: #eee;
-  box-shadow: inset 0 1px #d5d5d5;
-  color: $text-dark;
-  padding: 8px 10px;
-  min-width: 48px;
-  position: relative;
-  &.open {
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
-  }
-}
 .slm-select-value {
   display: flex;
   justify-content: space-between;
   width: 100%;
   .caret {
     margin-top: 4px;
+    border-color: $text-dark3;
+  }
+}
+.slm-select {
+  @mixin select;
+  &.open {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+  &.disabled {
+    cursor: default;
+    background-color: #ddd;
+    color: $text-med;
+    .slm-select-value .caret {
+      border-color: $text-med;
+    }
   }
 }
 .dropdown-menu {

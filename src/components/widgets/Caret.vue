@@ -9,14 +9,13 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-@import '../../assets/css/global.css';
 
 .caret {
   width: 8px;
   height: 8px;
   transform: rotate(315deg);
-  border-left: 3px solid $bg-grey;
-  border-bottom: 3px solid $bg-grey;
+  border-left: 3px solid #000;
+  border-bottom: 3px solid #000;
   margin-left: 8px;
 }
 </style>

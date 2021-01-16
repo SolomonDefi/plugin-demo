@@ -2,24 +2,27 @@
     "plugin": {
         "title": "Solomon Payments",
         "secure": "Protected by Solomon",
-        "solomon": {
-            "label": "SOLOMON",
+        "solomon": "SOLOMON",
+        "chargebacks": {
+            "label": "DIRECT CHARGE",
             "select": "Select your cryptocurrency below:",
             "select_label": "Select Crypto",
             "schedule": "Schedule",
             "protection": "Charge Protection",
+            "price": "Price",
+            "usd_price": "USD Price",
             "currency": {
                 "SLM": "Solomon (SLM)",
                 "ETH": "Ethereum (ETH)" 
             }
         },
-        "paypal": {
-            "label": "PAYPAL",
-            "select": "Pay via PayPal"
+        "preorder": {
+            "label": "PREORDER",
+            "select": "Prepay for a future delivery:"
         },
-        "card": {
-            "label": "CARD",
-            "enter": "Enter your billing information below"
+        "escrow": {
+            "label": "ESCROW",
+            "enter": "Place funds into escrow"
         },
         "continue": "CONTINUE SHOPPING",
         "confirm": "CONFIRM"
@@ -71,7 +74,6 @@
             }
         },
         "footer": {
-            "solomon": "SOLOMON",
             "copyright": "© 2021 SolomonDefi",
             "text": "Payment demo presented by the Solomon team. Products are for display only, nothing is for sale at this time.",
             "sale": "Token Sale",

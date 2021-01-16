@@ -1,44 +1,46 @@
 <template>
-<div class="slm-plugin-crypto">
+<div class="slm-plugin-preorder">
   <div class="slm-plugin-content-title">
-    {{ $t('plugin.solomon.select') }}
+    {{ $t('plugin.preorder.select') }}
   </div>
   <div class="slm-plugin-content">
     <div class="slm-plugin-content-row">
       <div class="slm-plugin-select-title">
-        {{ $t('plugin.solomon.select_label') }}
+        {{ $t('plugin.chargebacks.select_label') }}
       </div>
       <SlmSelect
         v-model="currency"
-        :options="$tm('plugin.solomon.currency')"
+        :options="$tm('plugin.chargebacks.currency')"
         class="slm-plugin-row-right"
       />
     </div>
     <div class="slm-plugin-content-row">
       <div class="slm-plugin-select-title">
-        {{ $t('plugin.solomon.schedule') }}
+        {{ $t('plugin.chargebacks.schedule') }}
       </div>
       <div class="slm-plugin-row-right">
         <SlmSelect
           v-model="year"
+          :disabled="true"
           :options="['2021', '2022', '2023']"
           class="slm-plugin-year"
         />
         <SlmSelect
           v-model="month"
+          :disabled="true"
           :options="[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
           class="slm-plugin-month"
-          @update:modelValue="days = getDays($event)"
         />
         <SlmSelect
           v-model="day"
-          :options="days"
+          :options="[day]"
+          :disabled="true"
         />
       </div>
     </div>
     <div class="slm-plugin-content-row">
       <div class="slm-plugin-select-title">
-        {{ $t('plugin.solomon.protection') }}
+        {{ $t('plugin.chargebacks.protection') }}
       </div>
       <SlmSelect
         v-model="protection"
@@ -46,40 +48,53 @@
         class="slm-plugin-row-right"
       />
     </div>
+    <div class="slm-plugin-content-row">
+      <div class="slm-plugin-select-title">
+        {{ $t('plugin.chargebacks.price') }}
+      </div>
+      <div class="slm-plugin-row-right">
+        <div class="slm-plugin-price">
+          {{ price || '0' }}
+          <div class="slm-plugin-currency">
+            {{ currency }}
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 </template>
 
 <script>
-const monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-
 export default {
-  name: 'slm-plugin-crypto',
+  name: 'slm-plugin-preorder',
+  props: {
+    prices: {
+      type: Object,
+      default: () => ({ priceEth: 0, priceSlm: 0, priceUsd: 0 })
+    }
+  },
   data() {
     return {
-      month: 1,
-      days: this.getDays(1),
-      day: 1,
+      month: 6,
+      day: 16,
       year: '2021',
       currency: 'ETH',
       protection: '0%',
     };
   },
+  computed: {
+    price() {
+      return this.round(this.currency === 'ETH' ? this.prices.priceEth : this.prices.priceSlm);
+    },
+  },
   methods: {
-    getDays(month) {
-      return [...Array(monthDays[month - 1] + 1).keys()].slice(1);
+    round(n) {
+      return Math.round((n + Number.EPSILON) * 1000000) / 1000000;
     },
   },
 };
 </script>
 
 <style lang="postcss">
-.slm-plugin-crypto {
-  .slm-plugin-year {
-    flex-grow: 1;
-  }
-  .slm-plugin-month, .slm-plugin-year {
-    margin-right: 6px;
-  }
-}
 </style>

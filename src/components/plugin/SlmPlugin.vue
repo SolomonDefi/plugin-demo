@@ -10,7 +10,7 @@
         <div class="slm-plugin-types-wrap">
           <div class="slm-plugin-types">
             <div
-              v-for="plugin in ['solomon', 'paypal', 'card']"
+              v-for="plugin in plugins"
               :key="plugin"
               :ref="el => setTypeRef(plugin, el)"
               :class="{ active: type.name === plugin }"
@@ -25,9 +25,18 @@
           />
         </div>
         <div class="slm-plugin-content-wrap">
-          <SlmPluginSolomon v-if="type.name === 'solomon'" />
-          <SlmPluginPaypal v-if="type.name === 'paypal'" />
-          <SlmPluginCard v-if="type.name === 'card'" />
+          <SlmPluginChargebacks
+            v-if="type.name === 'chargebacks'"
+            :prices="prices"
+          />
+          <SlmPluginPreorder
+            v-if="type.name === 'preorder'"
+            :prices="prices"
+          />
+          <SlmPluginEscrow
+            v-if="type.name === 'escrow'"
+            :prices="prices"
+          />
           <div class="slm-plugin-secure">
             <img :src="IcLock">
             <div>{{ $t('plugin.secure') }}</div>
@@ -48,7 +57,10 @@
 </template>
 
 <script>
+import cartStore from '/src/store';
 import IcLock from '/src/assets/img/ic_lock.png';
+
+const plugins = ['chargebacks', 'preorder', 'escrow'];
 
 export default {
   name: 'slm-plugin',
@@ -57,34 +69,53 @@ export default {
     show: Boolean,
     initialType: {
       validator: value => (
-        ['solomon', 'paypal', 'card'].indexOf(value) !== -1
+        plugins.indexOf(value) !== -1
       ),
       default: 'solomon',
     },
   },
   data() {
     const types = {
-      solomon: {
-        name: 'solomon',
+      chargebacks: {
+        name: 'chargebacks',
         arrowPosition: '140px',
       },
-      paypal: {
-        name: 'paypal',
+      preorder: {
+        name: 'preorder',
         arrowPosition: '208px',
       },
-      card: {
-        name: 'card',
+      escrow: {
+        name: 'escrow',
         arrowPosition: '326px',
       },
     };
     return {
       IcLock,
       types,
-      type: types[this.initialType || 'solomon'],
+      plugins,
+      type: types[this.initialType || 'chargebacks'],
     };
   },
   computed: {
-
+    store() {
+      return cartStore();
+    },
+    priceCents() {
+      return this.store.totalPrice.value;
+    },
+    priceSlm() {
+      return this.priceCents * 0.001848;
+    },
+    priceEth() {
+      return this.priceCents * 0.0000084;
+    },
+    prices() {
+      return {
+        priceUsd: this.priceCents,
+        priceSlm: this.priceSlm,
+        priceEth: this.priceEth,
+      };
+    },
   },
   watch: {
     initialType(newVal) {
@@ -103,7 +134,7 @@ export default {
     setTypeRef(plugin, el) {
       const type = this.types[plugin];
       if(el) {
-        type.arrowPosition = `${el.offsetLeft + ((el.offsetWidth - 16) / 2)}px`;
+        type.arrowPosition = `${el.offsetLeft + ((el.offsetWidth - 20) / 2)}px`;
       }
     },
   },
@@ -228,7 +259,28 @@ export default {
       }
       .slm-plugin-row-right {
         @mixin flex-center;
+        @mixin title-medium 15px;
+        color: $text-dark3;
         justify-content: flex-start;
+        flex-grow: 1;
+      }
+      .slm-plugin-price {
+        @mixin select;
+        flex-grow: 1;
+        position: relative;
+        justify-content: flex-start;
+        .slm-plugin-currency {
+          @mixin title 13px;
+          color: $text-med2;
+          position: absolute;
+          right: 8px;
+          top: 10px;
+        }
+      }
+      .slm-plugin-month, .slm-plugin-year {
+        margin-right: 6px;
+      }
+      .slm-plugin-year {
         flex-grow: 1;
       }
     }
