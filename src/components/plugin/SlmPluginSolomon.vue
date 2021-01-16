@@ -1,24 +1,29 @@
 <template>
 <div class="slm-plugin-crypto">
   <div class="slm-plugin-content-title">
-    {{ $t('plugin.crypto.select') }}
+    {{ $t('plugin.solomon.select') }}
   </div>
   <div class="slm-plugin-content">
     <div class="slm-plugin-content-row">
       <div class="slm-plugin-select-title">
-        {{ $t('plugin.crypto.select_label') }}
+        {{ $t('plugin.solomon.select_label') }}
       </div>
       <SlmSelect
         v-model="currency"
-        :options="$tm('plugin.crypto.currency')"
+        :options="$tm('plugin.solomon.currency')"
         class="slm-plugin-row-right"
       />
     </div>
     <div class="slm-plugin-content-row">
       <div class="slm-plugin-select-title">
-        {{ $t('plugin.crypto.schedule') }}
+        {{ $t('plugin.solomon.schedule') }}
       </div>
       <div class="slm-plugin-row-right">
+        <SlmSelect
+          v-model="year"
+          :options="['2021', '2022', '2023']"
+          class="slm-plugin-year"
+        />
         <SlmSelect
           v-model="month"
           :options="[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
@@ -33,7 +38,7 @@
     </div>
     <div class="slm-plugin-content-row">
       <div class="slm-plugin-select-title">
-        {{ $t('plugin.crypto.protection') }}
+        {{ $t('plugin.solomon.protection') }}
       </div>
       <SlmSelect
         v-model="protection"
@@ -55,6 +60,7 @@ export default {
       month: 1,
       days: this.getDays(1),
       day: 1,
+      year: '2021',
       currency: 'ETH',
       protection: '0%',
     };
@@ -69,8 +75,11 @@ export default {
 
 <style lang="postcss">
 .slm-plugin-crypto {
-  .slm-plugin-month {
-    margin-right: 8px;
+  .slm-plugin-year {
+    flex-grow: 1;
+  }
+  .slm-plugin-month, .slm-plugin-year {
+    margin-right: 6px;
   }
 }
 </style>

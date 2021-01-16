@@ -6,7 +6,7 @@
         v-for="item in ['mens', 'womens', 'accessories', 'checkout']"
         :key="item"
         class="nav-item"
-        :class="{ active: name === item }"
+        :class="{ active: name === item, [item]: true }"
         @click="$router.push({ name: item })"
       >
         {{ $t(`demo.${item}.label`) }}
@@ -94,6 +94,14 @@ export default {
     width: 40px;
     img {
       height: 20px;
+    }
+  }
+  @media (max-width: 568px) {
+    .nav-search {
+      display: none;
+    }
+    .checkout {
+      display: none;
     }
   }
 }

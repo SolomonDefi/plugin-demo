@@ -1,13 +1,13 @@
 {
     "plugin": {
-        "title": "Payment Method",
-        "secure": "Ordering with our store is 100% safe and secure",
-        "crypto": {
-            "label": "CREDIT CARD",
+        "title": "Solomon Payments",
+        "secure": "Protected by Solomon",
+        "solomon": {
+            "label": "SOLOMON",
             "select": "Select your cryptocurrency below:",
             "select_label": "Select Crypto",
             "schedule": "Schedule",
-            "protection": "Backer Protection",
+            "protection": "Charge Protection",
             "currency": {
                 "SLM": "Solomon (SLM)",
                 "ETH": "Ethereum (ETH)" 
@@ -18,7 +18,7 @@
             "select": "Pay via PayPal"
         },
         "card": {
-            "label": "CRYPTO",
+            "label": "CARD",
             "enter": "Enter your billing information below"
         },
         "continue": "CONTINUE SHOPPING",
@@ -27,7 +27,7 @@
     "demo": {
         "title": "Baikal",
         "header_cart": "CART",
-        "header_cart_items": "{n} ITEM IN YOUR | {n} ITEMS IN YOUR ",
+        "header_cart_items": "{n} ITEM IN YOUR CART | {n} ITEMS IN YOUR CART",
         "add": "Add to cart",
         "cart": {
             "empty": "The cart is empty",

@@ -2,7 +2,11 @@
 <div class="home-wrap">
   <DemoHeader />
   <NavMenu />
-  <router-view />
+  <router-view v-slot="{ Component }">
+    <transition name="page-fade" mode="out-in" appear>
+      <component :is="Component" />
+    </transition>
+  </router-view>
   <DemoFooter />
 </div>
 </template>
@@ -18,6 +22,6 @@ export default {
 @import '../assets/css/global.css';
 
 .home-wrap {
-  background-color: $main-dark;
+  background-color: $bg-light;
 }
 </style>

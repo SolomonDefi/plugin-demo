@@ -16,6 +16,11 @@
       </div>
       <div class="footer-right">
         <div class="footer-link">
+          <a target="_blank" href="https://sale.solomondefi.com">
+            {{ $t('demo.footer.sale') }}
+          </a>
+        </div>
+        <div class="footer-link">
           <a target="_blank" href="https://medium.com/@solomondefi">
             {{ $t('demo.footer.blog') }}
           </a>
@@ -69,7 +74,7 @@ export default {
   padding: 24px 0;
 }
 .footer {
-    color: $text-dark;
+  color: $text-dark;
   .footer-left {
     max-width: 390px;
     padding-right: 30px;
@@ -103,6 +108,28 @@ export default {
       color: $text-dark3;
       &:hover {
         text-decoration: underline;
+      }
+    }
+  }
+  @media (max-width: 568px) {
+    .footer-content {
+      flex-direction: column;
+      .footer-left {
+        padding-right: 0;
+        text-align: center;
+        .solomon-logo {
+          justify-content: center;
+        }
+      }
+      .footer-right {
+        flex-wrap: wrap;
+        flex-direction: row;
+        > div {
+          width: 30%;
+          margin: 16px 0 0 0;
+          text-align: center;
+          flex-grow: 1;
+        }
       }
     }
   }

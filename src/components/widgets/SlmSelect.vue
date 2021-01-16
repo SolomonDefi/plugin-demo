@@ -76,8 +76,8 @@ export default {
   background-color: #eee;
   box-shadow: inset 0 1px #d5d5d5;
   color: $text-dark;
-  padding: 8px 12px;
-  min-width: 52px;
+  padding: 8px 10px;
+  min-width: 48px;
   position: relative;
   &.open {
     border-bottom-left-radius: 0px;
@@ -89,7 +89,7 @@ export default {
   justify-content: space-between;
   width: 100%;
   .caret {
-    margin-top: 3px;
+    margin-top: 4px;
   }
 }
 .dropdown-menu {

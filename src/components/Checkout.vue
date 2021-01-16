@@ -11,8 +11,9 @@
           {{ $t('demo.checkout.payment.express') }}
         </div>
         <div class="payment-options">
-          <div class="payment-crypto" @click="showPlugin('crypto')">
-            <img :src="CryptoImg">
+          <div class="payment-solomon" @click="showPlugin('solomon')">
+            <img :src="SolomonImg">
+            {{ $t('plugin.solomon.label') }}
           </div>
           <div class="payment-paypal" @click="showPlugin('paypal')">
             <img :src="PaypalImg">
@@ -45,14 +46,14 @@
 
 <script>
 import PaypalImg from '/src/assets/img/paypal.png';
-import CryptoImg from '/src/assets/img/crypto.png';
+import SolomonImg from '/src/assets/img/solomon_white.png';
 
 export default {
   name: 'checkout',
   data() {
     return {
       PaypalImg,
-      CryptoImg,
+      SolomonImg,
       paymentType: null,
     };
   },
@@ -92,10 +93,13 @@ export default {
             margin-right: 16px;
           }
         }
-        .payment-crypto {
+        .payment-solomon {
           background-color: #141414;
+          @mixin title 15px;
+          letter-spacing: 1.4px;
           > img {
             height: 22px;
+            margin-right: 8px;
           }
         }
         .payment-paypal {
@@ -115,6 +119,18 @@ export default {
   }
   .checkout-right {
     margin-left: 16px;
+  }
+  @media (max-width: 568px) {
+    .container {
+      flex-direction: column-reverse;
+      padding: 0;
+      .checkout-right {
+        margin-left: 0;
+      }
+      .checkout-left {
+        padding: 0 20px;
+      }
+    }
   }
 }
 </style>

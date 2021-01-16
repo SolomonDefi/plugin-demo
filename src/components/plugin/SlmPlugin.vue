@@ -10,22 +10,13 @@
         <div class="slm-plugin-types-wrap">
           <div class="slm-plugin-types">
             <div
-              :class="{ active: type.name === 'crypto' }"
-              @click="selectType(types.crypto)"
+              v-for="plugin in ['solomon', 'paypal', 'card']"
+              :key="plugin"
+              :ref="el => setTypeRef(plugin, el)"
+              :class="{ active: type.name === plugin }"
+              @click="selectType(types[plugin])"
             >
-              {{ $t('plugin.card.label') }}
-            </div>
-            <div
-              :class="{ active: type.name === 'paypal' }"
-              @click="selectType(types.paypal)"
-            >
-              {{ $t('plugin.paypal.label') }}
-            </div>
-            <div
-              :class="{ active: type.name === 'card' }"
-              @click="selectType(types.card)"
-            >
-              {{ $t('plugin.crypto.label') }}
+              {{ $t(`plugin.${plugin}.label`) }}
             </div>
           </div>
           <div
@@ -34,7 +25,7 @@
           />
         </div>
         <div class="slm-plugin-content-wrap">
-          <SlmPluginCrypto v-if="type.name === 'crypto'" />
+          <SlmPluginSolomon v-if="type.name === 'solomon'" />
           <SlmPluginPaypal v-if="type.name === 'paypal'" />
           <SlmPluginCard v-if="type.name === 'card'" />
           <div class="slm-plugin-secure">
@@ -66,16 +57,16 @@ export default {
     show: Boolean,
     initialType: {
       validator: value => (
-        ['crypto', 'paypal', 'card'].indexOf(value) !== -1
+        ['solomon', 'paypal', 'card'].indexOf(value) !== -1
       ),
-      default: 'crypto',
+      default: 'solomon',
     },
   },
   data() {
     const types = {
-      crypto: {
-        name: 'crypto',
-        arrowPosition: '110px',
+      solomon: {
+        name: 'solomon',
+        arrowPosition: '140px',
       },
       paypal: {
         name: 'paypal',
@@ -89,7 +80,7 @@ export default {
     return {
       IcLock,
       types,
-      type: types[this.initialType || 'crypto'],
+      type: types[this.initialType || 'solomon'],
     };
   },
   computed: {
@@ -108,6 +99,12 @@ export default {
     },
     selectType(type) {
       this.type = type;
+    },
+    setTypeRef(plugin, el) {
+      const type = this.types[plugin];
+      if(el) {
+        type.arrowPosition = `${el.offsetLeft + ((el.offsetWidth - 16) / 2)}px`;
+      }
     },
   },
   mounted() {
@@ -206,7 +203,7 @@ export default {
       height: 96px;
     }
     .slm-plugin-content {
-      width: 320px;
+      width: 340px;
       height: 184px;
       margin: 0 auto;
       @mixin flex-center-col;
@@ -226,7 +223,7 @@ export default {
         justify-content: flex-end;
         color: $text-dark;
         height: 34px;
-        width: 130px;
+        width: 120px;
         margin-right: 8px;
       }
       .slm-plugin-row-right {

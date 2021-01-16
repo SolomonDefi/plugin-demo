@@ -1,5 +1,5 @@
 <template>
-<div class="store-page">
+<div :key="$route.name" class="store-page">
   <div class="container">
     <div class="store-title">
       {{ $t(`demo.${name}.title`) }}
@@ -43,6 +43,9 @@ export default {
         console.log(e);
       }
     }
+  },
+  beforeRouteUpdate() {
+
   },
   mounted() {
     this.refreshProducts(this.name);

@@ -9,7 +9,9 @@
     <div v-if="quantity">
       {{ $tc('demo.header_cart_items', quantity) }}
     </div>
-    <div>{{ $t('demo.header_cart') }}</div>
+    <div v-else>
+      {{ $t('demo.header_cart') }}
+    </div>
   </div>
   <transition name="header-cart">
     <Cart
@@ -76,20 +78,21 @@ export default {
 
 .header-cart {
   @mixin title 12px;
-  background-color: $bg-grey;
   height: 34px;
-  border-radius: 17px;
   display: flex;
   align-items: center;
   justify-content: center;
   letter-spacing: 2px;
-  padding: 0 32px;
   cursor: pointer;
   user-select: none;
   position: relative;
   .header-cart-title {
+    background-color: $bg-grey;
     display: flex;
     align-items: center;
+    padding: 0 32px;
+    height: 100%;
+    border-radius: 17px;
     img {
       width: 16px;
       margin-right: 8px;
@@ -103,6 +106,15 @@ export default {
     cursor: default;
     .cart-size {
       padding-left: 2px;
+    }
+  }
+  @media (max-width: 568px) {
+    width: 100%;
+    .cart-wrap {
+      left: 0;
+      .header-cart-title {
+        margin: 0 24px;
+      }
     }
   }
 }

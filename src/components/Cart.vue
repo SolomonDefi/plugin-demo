@@ -252,5 +252,36 @@ export default {
       background: $main-blue;
     }
   }
+  @media (max-width: 568px) {
+    width: 100vw;
+    .cart-product {
+      .cart-title-wrap {
+        margin-right: 8px;
+        .cart-title {
+          font-size: 14px;
+        }
+        .cart-variant {
+          font-size: 13px;
+        }
+      }
+      .cart-size-wrap .cart-size {
+        margin: 0 4px;
+      }
+    }
+    .cart-checkout-wrap .cart-checkout-info .cart-more-info {
+      display: none;
+    }
+    .cart-buttons {
+      > div {
+        height: 40px;
+        line-height: 14px;
+        text-align: center;
+        margin-left: 4px;
+        &:first-child {
+          margin: 0 4px 0 0;
+        }
+      }
+    }
+  }
 }
 </style>

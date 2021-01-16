@@ -135,5 +135,17 @@ export default {
       @mixin text-italic 16px;
     }
   }
+  @media (max-width: 568px) {
+    margin-right: 0;
+    .product-image {
+      width: 100%;
+    }
+    .product-info {
+      text-align: center;
+      .product-sizes {
+        justify-content: center;
+      }
+    }
+  }
 }
 </style>

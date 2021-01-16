@@ -38,4 +38,10 @@ html,body {
   margin: 0 auto;
 }
 
+@media (max-width: 568px) {
+  .container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
 </style>

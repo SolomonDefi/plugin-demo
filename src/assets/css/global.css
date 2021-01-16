@@ -91,3 +91,10 @@ $border-med: #d8d8d8;
   border-radius: 10px;
   border: 1px solid #4d4e53;
 }
+
+.page-fade-enter-active, .page-fade-leave-active {
+  transition: opacity 0.25s linear;
+}
+.page-fade-enter-from, .page-fade-leave-to {
+  opacity: 0;
+}
