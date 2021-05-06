@@ -45,11 +45,15 @@
 </template>
 
 <script>
+import { SlmPlugin } from '@solomon/plugin';
 import SolomonImg from '/src/assets/img/solomon_white.png';
 import PaypalImg from '/src/assets/img/paypal.png';
 
 export default {
   name: 'checkout',
+  components: {
+    SlmPlugin,
+  },
   data() {
     return {
       SolomonImg,
@@ -66,7 +70,8 @@ export default {
 </script>
 
 <style lang="postcss">
-@import '../assets/css/global.css';
+@import '/node_modules/@solomon/plugin/dist/style.css';
+@import '/src/assets/css/global.css';
 
 .checkout {
   background-color: $bg-light;

@@ -2,7 +2,7 @@
 module.exports = {
   plugins: [
     require('postcss-import')({
-      from: './src/asets/css/',
+      from: './src/assets/css/',
     }),
     require('autoprefixer'),
     require('postcss-modules')({

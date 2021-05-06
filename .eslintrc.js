@@ -11,7 +11,6 @@ module.exports = {
   ignorePatterns: ['node_modules/'],
   rules: {
     'no-console': 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'space-before-function-paren': ['error', { anonymous: 'never', named: 'never', asyncArrow: 'always' }],
     'padded-blocks': 'off',
     'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
