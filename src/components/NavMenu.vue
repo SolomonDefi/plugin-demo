@@ -21,31 +21,30 @@
 </template>
 
 <script>
-import IcSearch from '/src/assets/img/ic_search.png';
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
 
 export default {
   name: 'nav-menu',
-  data() {
-    return {
-      IcSearch,
-    };
-  },
-  computed: {
-    name() {
-      return this.$route.name;
-    },
-    underlineStyle() {
-      if(this.name === 'mens') {
+  setup() {
+    const route = useRoute();
+    
+    const underlineStyle = computed(() => {
+      if(route.name === 'mens') {
         return { left: '-1px', width: '44px' };
       }
-      if(this.name === 'womens') {
+      if(route.name === 'womens') {
         return { left: '67px', width: '72px' };
       }
-      if(this.name ==='accessories') {
+      if(route.name ==='accessories') {
         return { left: '161px', width: '104px' };
       }
       return { left: '289px', width: '82px' };
-    }
+    });
+    return {
+      underlineStyle,
+      name: route.name,
+    };
   },
 };
 </script>

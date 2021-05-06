@@ -36,7 +36,7 @@ export default {
 </script>
 
 <style lang="postcss">
-@import '../../assets/css/global.css';
+@import '/src/assets/css/global.css';
 
 .section-head {
   color: $text-med;

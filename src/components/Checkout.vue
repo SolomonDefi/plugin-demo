@@ -11,12 +11,12 @@
           {{ $t('demo.checkout.payment.express') }}
         </div>
         <div class="payment-options">
-          <div class="payment-solomon" @click="showPlugin('chargebacks')">
-            <img :src="SolomonImg">
+          <div class="payment-solomon" @click="paymentType = 'chargebacks'">
+            <img :src="SolomonWhite">
             {{ $t('plugin.solomon') }}
           </div>
           <div class="payment-paypal">
-            <img :src="PaypalImg">
+            <img :src="Paypal">
           </div>
           <div class="payment-card">
             {{ $t('demo.checkout.payment.card') }}
@@ -39,32 +39,29 @@
   <SlmPlugin
     :show="!!paymentType"
     :initialType="paymentType"
+    :priceUsdCents="price"
     @cancel="paymentType = null"
   />
 </div>
 </template>
 
 <script>
+import { ref } from 'vue';
+import cartStore from '/src/store';
 import { SlmPlugin } from '@solomon/plugin';
-import SolomonImg from '/src/assets/img/solomon_white.png';
-import PaypalImg from '/src/assets/img/paypal.png';
 
 export default {
   name: 'checkout',
   components: {
     SlmPlugin,
   },
-  data() {
+  setup() {
+    const store = cartStore();
+    const paymentType = ref(null);
     return {
-      SolomonImg,
-      PaypalImg,
-      paymentType: null,
+      paymentType,
+      price: store.totalPrice,
     };
-  },
-  methods: {
-    showPlugin(type) {
-      this.paymentType = type;
-    },
   },
 };
 </script>

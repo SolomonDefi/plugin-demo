@@ -1,5 +1,6 @@
 import Vue from '@vitejs/plugin-vue';
 import ViteComponents from 'vite-plugin-components';
+import ViteImages from 'vite-plugin-vue-images';
 
 module.exports = {
   assetsInlineLimit: 1,
@@ -10,5 +11,6 @@ module.exports = {
   plugins: [
     Vue(),
     ViteComponents(),
+    ViteImages(),
   ],
 };
